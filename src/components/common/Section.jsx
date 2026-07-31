@@ -1,9 +1,13 @@
 function Section({
+  id,
   children,
   className = "",
 }) {
   return (
-    <section className={`py-24 ${className}`}>
+    <section
+      id={id}
+      className={`py-24 ${className}`}
+    >
       {children}
     </section>
   );

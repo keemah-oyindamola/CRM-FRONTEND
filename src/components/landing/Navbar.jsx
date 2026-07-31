@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-scroll";
 import { Menu, X } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 
@@ -31,30 +32,29 @@ function Navbar() {
   const navLinks = [
     {
       name: "Features",
-      href: "#features",
+      to: "features",
     },
     {
       name: "Pricing",
-      href: "#pricing",
+      to: "pricing",
     },
     {
       name: "Testimonials",
-      href: "#testimonials",
+      to: "testimonials",
     },
     {
       name: "FAQ",
-      href: "#faq",
+      to: "faq",
     },
   ];
 
   return (
     <>
       <header
-        className={`fixed inset-x-0 top-0 z-50 border-b border-slate-200/70 bg-white/80 backdrop-blur-xl transition-all duration-300 ${
-          isScrolled
+        className={`fixed inset-x-0 top-0 z-50 border-b border-slate-200/70 bg-white/80 backdrop-blur-xl transition-all duration-300 ${isScrolled
             ? "h-16 shadow-lg shadow-slate-900/5"
             : "h-20"
-        }`}
+          }`}
       >
         <Container className="flex h-full items-center justify-between">
           {/* Logo */}
@@ -63,13 +63,18 @@ function Navbar() {
           {/* Desktop Navigation */}
           <nav className="hidden items-center gap-8 lg:flex">
             {navLinks.map((link) => (
-              <a
+              <Link
                 key={link.name}
-                href={link.href}
-                className="font-medium text-slate-600 transition-colors hover:text-emerald-600"
+                to={link.to}
+                smooth={true}
+                duration={700}
+                offset={-90}
+                spy={true}
+                className="cursor-pointer font-medium text-slate-600 transition-colors hover:text-emerald-600"
+                activeClass="text-emerald-600"
               >
                 {link.name}
-              </a>
+              </Link>
             ))}
           </nav>
 
@@ -151,10 +156,8 @@ function Navbar() {
                   className="flex flex-col gap-6"
                 >
                   {navLinks.map((link) => (
-                    <motion.a
+                    <motion.div
                       key={link.name}
-                      href={link.href}
-                      onClick={() => setIsOpen(false)}
                       variants={{
                         hidden: {
                           opacity: 0,
@@ -165,10 +168,20 @@ function Navbar() {
                           x: 0,
                         },
                       }}
-                      className="text-lg font-medium text-slate-700 transition hover:text-emerald-600"
                     >
-                      {link.name}
-                    </motion.a>
+                      <Link
+                        to={link.to}
+                        smooth={true}
+                        duration={700}
+                        offset={-90}
+                        spy={true}
+                        onClick={() => setIsOpen(false)}
+                        className="block cursor-pointer text-lg font-medium text-slate-700 transition hover:text-emerald-600"
+                        activeClass="text-emerald-600"
+                      >
+                        {link.name}
+                      </Link>
+                    </motion.div>
                   ))}
 
                   <div className="mt-4 flex flex-col gap-3">
