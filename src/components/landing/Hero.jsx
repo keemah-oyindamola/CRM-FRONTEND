@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import Button from "../common/Button";
 import Container from "../common/Container";
 import Section from "../common/Section";
+import { Link } from "react-router-dom";
 
 function Hero() {
   return (
@@ -38,9 +39,11 @@ function Hero() {
             </p>
 
             <div className="mt-10 flex flex-wrap gap-4">
-              <Button className="px-8 py-4">
-                Start Free Trial
-              </Button>
+              <Link to="/register">
+                <Button className="px-8 py-4">
+                  Start Free Trial
+                </Button>
+              </Link>
 
               <Button
                 variant="secondary"

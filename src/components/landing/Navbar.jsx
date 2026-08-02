@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-scroll";
+import { Link as ScrollLink } from "react-scroll";
 import { Menu, X } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 import Logo from "../common/Logo";
 import Button from "../common/Button";
@@ -52,8 +53,8 @@ function Navbar() {
     <>
       <header
         className={`fixed inset-x-0 top-0 z-50 border-b border-slate-200/70 bg-white/80 backdrop-blur-xl transition-all duration-300 ${isScrolled
-            ? "h-16 shadow-lg shadow-slate-900/5"
-            : "h-20"
+          ? "h-16 shadow-lg shadow-slate-900/5"
+          : "h-20"
           }`}
       >
         <Container className="flex h-full items-center justify-between">
@@ -63,7 +64,7 @@ function Navbar() {
           {/* Desktop Navigation */}
           <nav className="hidden items-center gap-8 lg:flex">
             {navLinks.map((link) => (
-              <Link
+              <ScrollLink
                 key={link.name}
                 to={link.to}
                 smooth={true}
@@ -74,19 +75,23 @@ function Navbar() {
                 activeClass="text-emerald-600"
               >
                 {link.name}
-              </Link>
+              </ScrollLink>
             ))}
           </nav>
 
           {/* Desktop Buttons */}
           <div className="hidden items-center gap-3 lg:flex">
-            <Button variant="secondary">
-              Login
-            </Button>
+            <Link to="/login">
+              <Button variant="secondary">
+                Login
+              </Button>
+            </Link>
 
-            <Button>
-              Start Free Trial
-            </Button>
+            <Link to="/register">
+              <Button>
+                Start Free Trial
+              </Button>
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -169,7 +174,7 @@ function Navbar() {
                         },
                       }}
                     >
-                      <Link
+                      <ScrollLink
                         to={link.to}
                         smooth={true}
                         duration={700}
@@ -180,21 +185,31 @@ function Navbar() {
                         activeClass="text-emerald-600"
                       >
                         {link.name}
-                      </Link>
+                      </ScrollLink>
                     </motion.div>
                   ))}
 
                   <div className="mt-4 flex flex-col gap-3">
-                    <Button
-                      variant="secondary"
+                    <Link
+                      to="/login"
                       onClick={() => setIsOpen(false)}
                     >
-                      Login
-                    </Button>
+                      <Button
+                        variant="secondary"
+                        className="w-full"
+                      >
+                        Login
+                      </Button>
+                    </Link>
 
-                    <Button onClick={() => setIsOpen(false)}>
-                      Start Free Trial
-                    </Button>
+                    <Link
+                      to="/register"
+                      onClick={() => setIsOpen(false)}
+                    >
+                      <Button className="w-full">
+                        Start Free Trial
+                      </Button>
+                    </Link>
                   </div>
                 </motion.nav>
               </Container>
